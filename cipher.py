@@ -162,6 +162,10 @@ def transform(dir, msg, cmd):
     Returns:
         str: the message string after all transformations are executed
     """
+    if len(msg) < 1:
+        return ""
+    if len(cmd) < 1:
+        return msg
     cmds = cmd.split(";")
     if dir == "D":
         # Decrypting mode, run transformations in reverse

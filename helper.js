@@ -6,3 +6,9 @@ function upperCaseF(a){
         }
     }, 1);
 }
+
+function upperCaseT(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}

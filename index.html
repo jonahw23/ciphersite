@@ -7,53 +7,66 @@
         <title>Cipher App</title>
 
         <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <script src="helper.js"></script>
     </head>
 
-    <body>
-        <label for="fname">Message string:</label>
-        <input type="text" id="message_str" name="message_str" style="text-transform:uppercase" onkeydown="upperCaseF(this)" required><br><br>
-        <label for="fname">Transformation string:</label>
-        <input type="text" id="trans_str" name="trans_str"><br><br>
-        <button py-click="encrypt()" id="ecrypt_button" class="py-button">Encrypt</button>
-        <button py-click="decrypt()" id="decrypt" class="py-button">Decrypt</button>
-        <p id="output"></p>
+    <body style="background-image: url('https://t3.ftcdn.net/jpg/02/69/46/42/360_F_269464287_Q2DoeIRT847orJlYDSX59T8pjlF9nO94.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; font-family:'Black Ops One';">
+        <h1 style="display:flex; align-items: center; justify-content: center; font-size:300%; margin-bottom:0%">Lab 1: Ciphers</h1>
+        <div style="display:flex; align-items: center; justify-content: center;">
+            <label for="fname">Message string:</label>&nbsp;
+            <input type="text" id="message_str" name="message_str" style="text-transform:uppercase" onkeydown="upperCaseF(this)" required><br><br>
+        </div>
+        <div  style="display:flex; align-items: center; justify-content: center; ">
+            <label for="fname">Transformation string:</label>&nbsp;
+            <input type="text" id="trans_str" name="trans_str" onkeydown="upperCaseT(this)" required><br><br>
+        </div>
+        <div style="display:flex; align-items: center; justify-content: center; margin-top:2%">
+            <button py-click="encrypt()" id="ecrypt_button" class="py-button">Encrypt</button>
+            &nbsp;&nbsp;&nbsp;
+            <button py-click="decrypt()" id="decrypt" class="py-button">Decrypt</button>
+        </div>
+        <div style="display:flex; align-items: center; justify-content: center; margin-top:2%;">
+            <p id="output"></p>
+        </div>
+        
+            <py-config>
+                plugins = [
+                "https://pyscript.net/latest/plugins/python/py_tutor.py"
+                ]
+                [[fetch]]
+                files = ["./cipher.py"]
+            </py-config>
 
-        <py-config>
-            plugins = [
-              "https://pyscript.net/latest/plugins/python/py_tutor.py"
-            ]
-            [[fetch]]
-            files = ["./cipher.py"]
-        </py-config>
+            <py-script>
+                from pyscript import Element
+                import cipher
 
-        <py-script>
-            from pyscript import Element
-            import cipher
+                def encrypt():
 
-            def encrypt():
+                    # Get paragraph element by id
+                    paragraph = Element("output")
 
-                # Get paragraph element by id
-                paragraph = Element("output")
+                    inputval = Element("message_str").value
+                    transval = Element("trans_str").value
 
-                inputval = Element("message_str").value
-                transval = Element("trans_str").value
+                    # Add current time to the paragraph element
+                    paragraph.write("Encrypted Text:\n" +  cipher.transform("E", inputval, transval))
 
-                # Add current time to the paragraph element
-                paragraph.write(cipher.transform("E", inputval, transval))
+                def decrypt():
 
-            def decrypt():
+                    # Get paragraph element by id
+                    paragraph = Element("output")
 
-                # Get paragraph element by id
-                paragraph = Element("output")
+                    inputval = Element("message_str").value
+                    transval = Element("trans_str").value
 
-                inputval = Element("message_str").value
-                transval = Element("trans_str").value
-
-                # Add current time to the paragraph element
-                paragraph.write(cipher.transform("D", inputval, transval))
-        </py-script>
+                    # Add current time to the paragraph element
+                    paragraph.write("Decrypted Text:\n" + cipher.transform("D", inputval, transval))
+            </py-script>
     </body>
       
 </html>
