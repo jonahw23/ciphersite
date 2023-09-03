@@ -10,5 +10,6 @@ function upperCaseF(a){
 function upperCaseT(a){
     setTimeout(function(){
         a.value = a.value.toUpperCase();
+        a.value = a.value.replace(/\s+/g, '')
     }, 1);
 }

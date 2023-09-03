@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
         <script defer src="https://pyscript.net/latest/pyscript.js"></script>
         <script src="helper.js"></script>
     </head>
@@ -23,6 +24,11 @@
         <div  style="display:flex; align-items: center; justify-content: center; ">
             <label for="fname">Transformation string:</label>&nbsp;
             <input type="text" id="trans_str" name="trans_str" onkeydown="upperCaseT(this)" required><br><br>
+            <div class="help-tip">
+                <p>Input transformations separated by semicolons according to the following syntax:<br />
+                <img src="https://i.ibb.co/Wg3NRYZ/image.png" style="width:178px">
+                </p>
+            </div>
         </div>
         <div style="display:flex; align-items: center; justify-content: center; margin-top:2%">
             <button py-click="encrypt()" id="ecrypt_button" class="py-button">Encrypt</button>
