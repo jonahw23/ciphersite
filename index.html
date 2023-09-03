@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title: PyScript</title>
-</head>
-<body>
-	<py-script> print("Hello, World!") </py-script>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <title>Cipher App</title>
+
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+        <script src="helper.js"></script>
+    </head>
+
+    <body>
+        <label for="fname">Message string:</label>
+        <input type="text" id="message_str" name="message_str" style="text-transform:uppercase" onkeydown="upperCaseF(this)" required><br><br>
+        <label for="fname">Transformation string:</label>
+        <input type="text" id="trans_str" name="trans_str"><br><br>
+        <button py-click="encrypt()" id="ecrypt_button" class="py-button">Encrypt</button>
+        <button py-click="decrypt()" id="decrypt" class="py-button">Decrypt</button>
+        <p id="output"></p>
+
+        <py-config>
+            plugins = [
+              "https://pyscript.net/latest/plugins/python/py_tutor.py"
+            ]
+            [[fetch]]
+            files = ["./cipher.py"]
+        </py-config>
+
+        <py-script>
+            from pyscript import Element
+            import cipher
+
+            def encrypt():
+
+                # Get paragraph element by id
+                paragraph = Element("output")
+
+                inputval = Element("message_str").value
+                transval = Element("trans_str").value
+
+                # Add current time to the paragraph element
+                paragraph.write(cipher.transform("E", inputval, transval))
+
+            def decrypt():
+
+                # Get paragraph element by id
+                paragraph = Element("output")
+
+                inputval = Element("message_str").value
+                transval = Element("trans_str").value
+
+                # Add current time to the paragraph element
+                paragraph.write(cipher.transform("D", inputval, transval))
+        </py-script>
+    </body>
+      
 </html>
